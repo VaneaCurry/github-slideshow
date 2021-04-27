@@ -1,0 +1,50 @@
+name: 🦠🦠🦠✨✨Test✨✨🦠🦠🦠🚀 
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 23 * * *'
+env:
+  CI: true
+  GITHUB_ACTIONS: true
+  DOCKER_BUILDKIT: 1
+  NUM_JOBS: 4
+
+
+jobs:
+#
+# GNU/Linux
+#
+
+  lin:
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+          include: [
+          { os: 16, backend: mcode },
+          { os: 18, backend: mcode },
+          { os: 20, backend: mcode },
+          { os: 16, backend: llvm-5.0 },
+          { os: 18, backend: llvm-5.0 },
+          { os: 20, backend: llvm-10 },
+          { os: 18, backend: gcc-8.3.0 },
+          { os: 20, backend: gcc-9.3.0 }
+        ]
+    name: '🐧❤️🥵Ubuntu ${{ matrix.os }} · ${{ matrix.backend }} 💥❤️'
+    runs-on: ubuntu-${{ matrix.os }}.04
+    timeout-minutes: 360
+    steps:
+
+    - name: '🧰🦊❤️Checkout🔥🔥🦠🦠'
+      uses: actions/checkout@v2
+
+    - name: '🛳️ 🖥️Build and in containers🔥🔥'
+      run: |
+        TASK=ubuntu${{ matrix.os }}+${{ matrix.backend }} 
+        chmod u+r+x node.sh
+        ./node.sh
+    - name: '📤 Upload artifact: package🦠'
+      uses: actions/upload-artifact@v2
+      with:
+        path: ghdl-gha-ubuntu-*.tgz
