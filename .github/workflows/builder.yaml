@@ -2,6 +2,8 @@ name: 🦠🦠🦠✨✨Test✨✨🦠🦠🦠🚀
 
 on:
   workflow_dispatch:
+  branches:
+      - '*'
   schedule:
     - cron: '0 23 * * *'
 env:
