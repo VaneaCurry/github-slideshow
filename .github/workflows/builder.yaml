@@ -2,10 +2,10 @@ name: 🦠🦠🦠✨✨Test✨✨🦠🦠🦠🚀
 
 on:
   workflow_dispatch:
-  branches:
-      - '*'
-  schedule:
-    - cron: '0 23 * * *'
+    branches:
+        - '*'
+    schedule:
+        - cron: '0 23 * * *'
 env:
   CI: true
   GITHUB_ACTIONS: true
