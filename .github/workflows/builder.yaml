@@ -1,7 +1,7 @@
 name: 🦠🦠🦠✨✨Test✨✨🦠🦠🦠🚀 
 
 on:
-  workflow_dispatch:
+  push:
     branches:
         - '*'
     schedule:
